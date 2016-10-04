@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Introduction to Spark and RDDs</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/circuit-board-1144819.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Spark and RDDs</h1>
+                        <hr class="small">
+                        <span class="subheading">Posted by Nicole T Blok, PhD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div>
+                        <h2 class="post-title">
+                         What is an RDD?
+                        </h2>
+                        <p class="post-meta">
+                          An RDD is a resilient distributed dataset, which is an abstraction of data partitioned across a cluster of nodes with a lineage graph that provides
+                          instructions as to how it was created or can be re-created which provides it with the characteristic of
+                          fault resilience.
+                        </p>
+                </div>
+                <hr>
+
+                <div>
+                          <h2 class="post-title">
+                           What are the main use cases for the design of Spark?
+                          </h2>
+                          <p class="post-meta">
+                          Spark was designed for two main use cases in big data processing:  1) iterative machine learning
+                          algorithms such as logistic regression and pagerank and 2) interactive data mining.
+                          </p>
+                  </div>
+                  <hr>
+
+                  <div>
+                            <h2 class="post-title">
+                             How does an RDD handle fault tolerance?
+                            </h2>
+                            <p class="post-meta">
+                              By storing a lineage graph or set of instructions on how it can be re-created from
+                              transformations and actions for each job stage.
+                            </p>
+                    </div>
+                    <hr>
+
+                    <div>
+                              <h2 class="post-title">
+                               What are the differences between narrow and wide dependencies?
+                              </h2>
+                              <p class="post-meta">
+                                 Narrow dependencies occur when each partition of the parent RDD are used by only 1
+                                 partition of the child RDD. Execution of narrow dependecies can be pipelined on one cluster node.
+                                 Also, fault recovery is most efficient with narrow dependencies.  Wide dependencies occur when
+                                 each partition of the parent RDD are used by multiple partitions of the child RDD.  RDD persistence
+                                  or storage is often performed for RDDs of wide dependencies for more efficient fault recovery.
+                              </p>
+                      </div>
+                      <hr>
+
+                      <div>
+                                <h2 class="post-title">
+                                 Compare and contrast between RDD and MapReduce?
+                                </h2>
+                                <p class="post-meta">
+                                RDD and MapReduce have similarities in that they both involve data transformations performed on partitioned data.  However, they are different entities - one is data or an abstraction of data with a history of lineage (RDD), while the other is a programming paradigm for distributed data (MapReduce).  More specifically, an RDD is either an abstraction of partitioned data or partitioned data in-memory or stable storage.  RDD has a lineage map that basically is the set of instructions on how it was created from data transformations on parent RDD(s) or distributed data.  These data transformations may have happened similarly to transformations that happen in MapReduce. However in contrast, MapReduce is a programming paradigm where a mapper program to define key-value pairs is sent to partitioned data on a cluster of computer nodes.  Then a sort and shuffle procedure takes place followed by a reducer program sent to all of the newly sorted mapped key-value data partitions.  The reducer program performs final transformations to output a final non-partitioned dataset or value(s).
+                                </p>
+                        </div>
+                        <hr>
+
+                        <div>
+                                  <h2 class="post-title">
+                                    What is an additional concept or idea that is really appealing about Spark?
+                                  </h2>
+                                  <p class="post-meta">
+                                    Spark's job scheduler examines an RDDs lineage graph to compute job stages for the most efficient execution with as many pipelined transformations with narrow dependencies as possible and stage boundaries at wide dependencies. This is performed at the time that a user runs an action.
+                                  </p>
+                          </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Reference:
+                    <a href="https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/zaharia">Zaharia, M. et al. 2012. Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing.</a>
+                    </p>
+                    <p class="copyright text-muted">Copyright &copy; Introduction to Spark and RDDs 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
