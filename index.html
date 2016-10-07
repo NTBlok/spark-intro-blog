@@ -114,7 +114,7 @@
 
                       <div>
                                 <h2 class="post-title">
-                                 Compare and contrast between RDD and MapReduce?
+                                 How does Spark's RDDs compare and contrast with MapReduce?
                                 </h2>
                                 <p class="post-meta">
                                 RDD and MapReduce have similarities in that they both involve data transformations performed on partitioned data.  However, they are different entities - one is data or an abstraction of data with a history of lineage (RDD), while the other is a programming paradigm for distributed data (MapReduce).  More specifically, an RDD is either an abstraction of partitioned data or partitioned data in-memory or stable storage.  RDD has a lineage map that basically is the set of instructions on how it was created from data transformations on parent RDD(s) or distributed data.  These data transformations may have happened similarly to transformations that happen in MapReduce. However in contrast, MapReduce is a programming paradigm where a mapper program to define key-value pairs is sent to partitioned data on a cluster of computer nodes.  Then a sort and shuffle procedure takes place followed by a reducer program sent to all of the newly sorted mapped key-value data partitions.  The reducer program performs final transformations to output a final non-partitioned dataset or value(s).
